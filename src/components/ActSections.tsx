@@ -362,12 +362,37 @@ export const ActSections: React.FC<ActSectionsProps> = ({ telemetry }) => {
                   className="w-full accent-[#0F8A83] h-2 bg-[#2D3748] rounded-lg appearance-none cursor-pointer"
                 />
                 <div className="flex justify-between text-xs text-[#FAFAF7]/50 font-mono">
-                  <span>1 P. (420 €)</span>
-                  <span>2 P. (760 €)</span>
+                  <span>1 P. (480 €)</span>
+                  <span>2 P. (940 €)</span>
                   <span>3 P. (1.120 €)</span>
                   <span>4 P. (1.480 €)</span>
                   <span>5 P. (1.650 €)</span>
-                  <span>6+ P. (1.800 €)</span>
+                  <span>Gewerbe (2.350 €)</span>
+                </div>
+
+                {/* 3D Life-Shield Category Selector */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {[
+                    { label: 'Single', persons: 1, savings: 480 },
+                    { label: 'Paar', persons: 2, savings: 940 },
+                    { label: 'Familie', persons: 4, savings: 1480 },
+                    { label: 'Gewerbe', persons: 6, savings: 2350 },
+                  ].map((tier) => (
+                    <button
+                      key={tier.label}
+                      onClick={() => {
+                        antigravityController.setHouseholdSize(tier.persons);
+                        antigravityController.setSavingsValue(tier.savings);
+                      }}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                        telemetry.savingsValue === tier.savings
+                          ? 'bg-[#5CBFBD] text-[#0F2D4A] font-bold border-[#5CBFBD] shadow-lg shadow-[#5CBFBD]/30'
+                          : 'bg-[#15426b]/40 text-[#FAFAF7]/80 border-white/10 hover:border-[#5CBFBD]/40'
+                      }`}
+                    >
+                      {tier.label}
+                    </button>
+                  ))}
                 </div>
               </div>
 
